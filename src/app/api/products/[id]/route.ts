@@ -1,44 +1,45 @@
-import { NextResponse } from 'next/server'
-import prisma from '@/app/lib/prisma'
+import { NextResponse } from "next/server";
+import prisma from "@/app/lib/prisma";
 
 export async function GET(
-  request: Request, 
+  request: Request,
   { params }: { params: { id: string } }
 ) {
+  const { id } = await params;
   const product = await prisma.product.findUnique({
-    where: { id: Number(params.id) },
-  })
+    where: { id: Number(id) },
+  });
 
   if (!product) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
 
-  return NextResponse.json(product)
+  return NextResponse.json(product);
 }
 
 export async function PUT(
-  request: Request, 
+  request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = Number(params.id)
-  const data = await request.json()
-  
-  const updated = await prisma.product.update({
-    where: { id },
-    data,
-  })
+  const { id } = await params;
+  const data = await request.json();
 
-  return NextResponse.json(updated)
+  const updated = await prisma.product.update({
+    where: { id: Number(id) },
+    data,
+  });
+
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(
-  request: Request, 
+  request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = Number(params.id)
+  const { id } = await params;
   const deleted = await prisma.product.delete({
-    where: { id },
-  })
-  
-  return NextResponse.json(deleted)
+    where: { id: Number(id) },
+  });
+
+  return NextResponse.json(deleted);
 }
