@@ -43,7 +43,7 @@ interface ProductData {
   
   // Przykładowe funkcje pomocnicze (placeholdery):
   async function fetchFromAllegroAPI(query: string) {
-    
+    console.log(query);
     // Implementacja szczegółów uwierzytelniania i requestu do Amazon PA-API
     // Zwraca dane surowe z Amazon, które później mapujesz na ProductData
     return [
@@ -52,6 +52,7 @@ interface ProductData {
   }
   
   async function fetchFromEbayAPI(query: string) {
+    console.log(query);
     // Implementacja requestu do eBay Browse API z użyciem tokena
     return [
       { title: 'Example eBay Product', price: 189.99, link: 'https://ebay.com/item' }
